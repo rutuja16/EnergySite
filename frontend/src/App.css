@@ -1,0 +1,376 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*{
+  font-family: "Inter", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  
+  
+}
+body{
+  width:100%;
+  
+}
+.App {
+  
+  background-color: linear-gradient(rgb(245, 215, 18),rgb(249, 143, 4),red);
+  width:100%;
+  height: auto;
+  overflow-y: auto;
+  position: relative;
+  background-color: #6d4fc2;
+}
+
+.Navbar{
+  width: 100%;
+  height:60px;
+  background-color: white;
+  text-align: end;
+  display: flex;
+  flex-direction: row wrap;
+  justify-content: space-evenly;
+}
+.Navbar h1{
+  text-align: center;
+}
+.btn
+{
+  font-size: bold;
+  color: white;
+  background-color: orangered;
+  text-decoration: none;
+}
+
+
+Link:active{
+  background-color: blue;
+}
+
+.container{
+  width:100%;
+}
+.Main-Container{
+  padding:2%;
+
+}
+.box-container{
+  background-color: white;
+  border:1px solid black;
+  margin:5% 10%;
+  width:80%;
+  height:100%;
+  text-align: justify;
+  padding:1% 3%;
+  border-radius: 20px;
+}
+.Heading{
+  text-align: center;
+  text-decoration: underline;
+  color:red;
+  margin-bottom: 5%;
+}
+
+.box{
+  margin:5% 2%;
+  width:100%;
+}
+
+label{
+  width:20%;
+  font-size: large;
+  font-weight: bold;
+}
+.input{
+  width:80%;
+  padding:10px;
+  border-radius: 3px;
+}
+.bottom{
+  text-align: right;
+}
+
+
+.btn-submit{
+  width:20%;
+  padding:1%;
+  font-weight: bold;
+  background-color: purple;
+  color:white;
+  border-radius: 3px;
+}
+
+.flex-box{
+  border-radius: 1%;
+  padding:1px 2px;
+  background-color: white;
+  border-radius: 20px;
+  padding:4%;
+ 
+
+}
+
+
+.flex-box-1 img{
+  width:fit-content;
+  object-fit: cover;
+  margin:1%;
+  padding:1%;
+  opacity: 0.8;
+
+}
+.flex-box-2{
+  width:50%;
+  opacity: 10;
+  margin:2%;
+  padding:2%;
+  color:black ;
+
+
+}
+.mid-head{
+  color:orangered;
+}
+
+
+/* Chatbot */
+.Chat-Container{
+  width:100%;
+  align-items: right;
+  justify-content: end;
+  display:flex;
+  overflow-y: scroll;
+  padding-right: 2%;
+}
+.chatbot-popup{
+  width:420px;
+  background:white;
+  border-radius: 15px;
+  box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),0 32 64,-48 rgba(0,0,0,0.5);
+  
+}
+.chatbot-popup .chat-header{
+  display: flex;
+  padding: 10px 22px;
+  align-items: center;
+  justify-content: space-between;
+  background: #6d4fc2;
+}
+
+.chatbot-popup .header-info{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+}
+.header-info img{
+  height:35px;
+  width:35px;
+  padding: 6px;
+  border-radius: 50%;
+  fill: #6d4fc2;
+  background:white ;
+  flex-shrink: 0;
+}
+.header-info .logo-text{
+  color:white;
+  font-size: 1.31 rem;
+  font-weight: 600;
+}
+
+.chat-header button{
+  height: 40px;
+  width: 40px;
+  border: none;
+  outline: none;
+  color:white;
+  background-color: #6d4fc2;
+  cursor: pointer;
+  font-size: 1.9 rem;
+  padding-top: 2px;
+  border-radius: 50px;
+  margin-right: -10px;
+  transition: 0.2s ease;
+}
+.chat-header button:hover{
+  background-color: #6d4fc2;
+}
+.chat-body{
+  height:460px;
+  overflow-y: auto;
+  padding: 25px 22px;
+  flex-direction: column;
+  overflow-y: auto;
+  gap:20px;
+}
+.chat-body .message{
+  display: flex;
+  gap:11px;
+  align-items: center;
+}
+.chat-body img{
+  height:35px;
+  width:35px;
+  padding: 6px;
+  border-radius: 50%;
+  fill: white;
+  background:#6d4fc2 ;
+  flex-shrink: 0;
+  align-self: flex-end;
+  margin-bottom: 2px;
+}
+
+.chat-body .message .bot-message{
+  padding:12px 16px;
+  max-width:75%;
+  word-wrap: break-word;
+  white-space: pre-line;
+  font-size: 0.9 rem;
+}
+
+.chat-body .bot-message .message-text{
+  background: #f6f2ff;
+  border-radius:13px 13px 13px 3px;
+  
+}
+.chat-body .user-message{
+  flex-direction: column;
+  align-items: flex-end;
+}
+.chat-body .user-message .message-text{
+  background: #f6f2ff;
+  border-radius:13px 13px 3px 13px;
+}
+
+.chat-footer{
+  position:relative;
+  bottom: 0;
+  width:100%;
+  background-color: white;
+  padding: 15px 22px 20px;
+}
+
+.chat-footer .chat-form{
+  display: flex;
+  align-items: center;
+  background: white;
+  outline: 1px solid #cccce5;
+  border-radius: 32px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.06);
+}
+
+.chat-footer .chat-form:focus-within{
+  outline: 1px solid #cccce5;
+}
+
+.chat-form input{
+  border:none;
+  outline: none;
+  background:none ;
+  height:47px;
+  padding: 0px 17px;
+  font-size: 0.95rem;
+  width:100%;
+}
+
+.chat-form button{
+  height: 35px;
+  width:35px;
+  border:none;
+  outline:none;
+  cursor: pointer;
+  background: #6d4fc2;
+  color: white;
+  flex-shrink: 0;
+  border-radius:50%;
+  margin-right: 10px;
+  font-size: 1.15rem;
+  transition: 0.2 ease;
+}
+
+.chat-form button:hover{
+  background: #593bab;
+}
+
+/* Main page */
+.Containers{
+  padding:3%;
+  width:100%;
+}
+.Containers .flex-box {
+  justify-content: center;
+  display: flex ;
+  justify-content: space-evenly;
+}
+.flex-box .card{
+  flex-direction: row wrap;
+  padding:10px;
+  text-align: center;
+  justify-content: space-around;
+  border-radius: 1px solid black;
+  border-radius: 2px;
+  margin:2% ;
+  justify-content: center;
+  border-radius: 5px;
+
+}
+.card img{
+  height:50%;
+  width:50%;
+  margin-left: 20%;
+}
+
+.flex-box .card-bottom{
+  border: 1px solid black;
+  background-color: rgb(196, 98, 238);
+  margin:0% 2%;
+  padding:2%;
+  text-decoration: none;
+  border-radius: 10px;
+
+}
+
+.Table-Container{
+  margin:2% 6%;
+}
+.table{
+  width:100%;
+  padding:2%;
+}
+
+footer{
+  height: 40px;
+  width:100%;
+  color: black;
+  background-color: orange;
+  text-align:center;}
+
+footer p{
+  padding-top:1%;
+}
+
+@media only screen and (max-width: 600px) {
+  .flex-box{
+    display: flex;
+    width:100%;
+    flex-direction:  column wrap;
+  }
+  .flex-box .card{
+    flex-direction: column wrap;
+    width:100%;
+  }
+  .Containers{
+    flex-direction: column wrap;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
