@@ -14,7 +14,7 @@ router.get("/getData",authUserToken,getData);
 
 router.get("/getUsers",getUsers);
 
-router.post("/payment/:uid",authUserToken ,addPayment);
+router.post("/payment/:bill_id",authUserToken ,addPayment);
 
 router.delete("/delete/:bill_id",authUserToken,deleteBill);
 

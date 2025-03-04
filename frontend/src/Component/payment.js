@@ -12,15 +12,17 @@ function Payment() {
 
     const { bill_id } = useParams(); // Extract ID from URL
     const location = useLocation();
-    const data = location.state?.data;
+    //const data = location.state?.data ; // if you are sharing data with link
+    const data = location.state
     //chaecking data
-    // console.log("Data through Location",data)
-    // console.log({bill_id})
+    console.log("Data through Location",data)
+
+    console.log("Payment bill id", {bill_id})
     
     const token = getSession("token");
     const[input, setInput]=useState({
             Bill_id:bill_id,
-            Amount:data.amount ,
+            Amount: 0 ,
             Paymode: "", 
             Upi:"",
             Mpin:"" ,

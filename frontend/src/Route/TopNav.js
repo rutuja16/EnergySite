@@ -16,7 +16,7 @@ function TopNav() {
     //localStorage.clear();
     sessionStorage.clear();
     setSession("isLoggedIn", {isLoggedIn : false  });
-    alert( " Session Expired " + getSession('token'));
+    //alert( " Session Expired " + getSession('token'));
     navigate("/")
 
   }

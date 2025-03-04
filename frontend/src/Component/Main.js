@@ -63,6 +63,12 @@ function Main(props) {
                     </div>
                 </div>
             </div>
+
+            <footer>
+              <div> 
+                    <p> CopyRight @ 2024-25 || EDF Energy</p>
+              </div>
+            </footer>
         </div>
     );
 }

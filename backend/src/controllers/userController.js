@@ -2,6 +2,7 @@ const {connectionWithMongoose ,userModel , meterModel , paymentModel} = require(
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 const mongoose =require('mongoose')
+const moment= require("moment")
 
 //npm install date-fns
 
@@ -78,9 +79,9 @@ const LoginController = async(req,res)=>{
     }
 }
 
-// function addDays(dateString, days) {
-//     return moment(dateString).add(days, 'days').format('YYYY-MM-DD');
-// }
+function addDays(dateString, days) {
+    return moment(dateString).add(days, 'days').format('YYYY-MM-DD');
+}
 
 // ****************************************Need to review code***********************************************
 
@@ -88,7 +89,7 @@ const LoginController = async(req,res)=>{
 const addMeter=async(req,res)=>{
     connectionWithMongoose();
     const { c_date, Reading ,  Name , DueDate} = req.body;
-    //console.log("AddMeter Request data" ,{ c_date, Reading , DueDate , Name} );
+    console.log("AddMeter Request data" ,{ c_date, Reading , DueDate , Name} );
 
     const UID = req.user._id //.toString();
     //console.log("UID in addMeter" , UID);
@@ -98,7 +99,7 @@ const addMeter=async(req,res)=>{
     const amount= reading + charges;
     const status='Due';
     const date = c_date;
-    const dueDate =  DueDate;
+    const dueDate =  DueDate || addDays(date ,30);
     console.log("date",date);
 
     //console.log({UID : UID , name:name,charges:charges , reading:reading, amount:amount, status:status , date:date ,dueDate:dueDate} )
@@ -117,30 +118,34 @@ const addMeter=async(req,res)=>{
 
 const addPayment = async(req,res)=>{
     connectionWithMongoose();
-    const bill_no= req.param.bill_id ;
-    const {Amount ,Paymode , Upi,Mpin ,Bill_id } = req.body;
-    //console.log("req.param.uid" ,req.param);
-    // console.log("Payment data" ,{ Amount ,Paymode , Upi,Mpin , Bill_id} )
-    //console.log("UID in getting Data" , bill_no);
-    const upi_id =Upi ;
-    const mpin =Mpin;
-    const amount=Amount;
-    const status="Paid";
-    const bill_ID = Bill_id;
+    // const bill_id = req.param.bill_id;
+    // console.log("req.param.bill No" ,bill_id);
 
+    //console.log("UID in getting Data" , bill_no);
+    // const upi_id = Upi ;
+    // const mpin =Mpin;
+    // const amount=Amount;
+    // const payMode =Paymode;
+
+    // const bill_ID = Bill_id ;
+    const {Amount ,Paymode , Upi,Mpin ,Bill_id } = req.body;
+    //console.log("Payment data" ,{ Amount ,Paymode , Upi,Mpin , Bill_id} )
+    const status="Paid";
     try{
-        var data= await meterModel.find({_id:bill_ID}); 
-        var paydata= await paymentModel.find({bill_id:bill_ID});
+        var data= await meterModel.findOne({_id:Bill_id}); 
+        var paydata= await paymentModel.findOne({bill_id:Bill_id});
         //console.log("Paydata",paydata);
-        //console.log("Bill data:",data)
-        if(!paydata || paydata.length === 0)
+        console.log("Bill data:",data)
+        if((!paydata || paydata.length === 0) && data.status==="Due")
         {
+            console.log("here")
             if (data.status!=="Paid" )
             {
-                const record= await new paymentModel({bill_id:bill_ID, upi_id:upi_id, mpin:mpin ,amount:amount ,status:status }) ;
+                await meterModel.updateOne({_id:Bill_id},{$set:{status:"Paid"} })
+
+                const record= await new paymentModel({bill_id:Bill_id, upi_id:Upi, mpin:Mpin ,amount:Amount ,payMode:Paymode ,status:status }) ;
                 await record.save();
 
-                await meterModel.updateOne({_id:bill_ID},{$set:{status:"Paid"} })
                 res.status(200).json({msg:"Thank You for Payment" , status:"success" })
 
                 console.log("Added Successfully", record);
@@ -165,7 +170,7 @@ const getData=async(req,res)=>{
         //console.log("UID Data" , data)
         if(data){
             res.status(201).json({msg:"Data Found" , data:data})
-            console.log("All Bill records :", data);
+            //console.log("All Bill records :", data);
         }
         else{
             res.json({msg:"Data Not Found !"})
@@ -187,7 +192,7 @@ const getUsers=async(req,res)=>{
         console.log("dat ===>",data)
         if(data){
             res.status(201).json({msg:"Data Found" , data:data})
-            console.log("All User Details :", data);
+            //console.log("All User Details :", data);
         }
         else{
             res.json({msg:"Data Not Found !"})
@@ -202,12 +207,15 @@ const getUsers=async(req,res)=>{
 const deleteBill=async (req, res) => {
     connectionWithMongoose();
     try {
-        const bill_id = req.param.bill_id;
+        const bill_id = req.params.bill_id;
+        console.log("-----" ,bill_id)
         const billRecord = await meterModel.findOne({ _id: bill_id });
-        var paymentRecord= await paymentModel.find({bill_id:bill_id});
-        //console.log("bill record in delete route:",record);
-        if (!paymentRecord) {
-            const dr = await meterModel.deleteOne({bill_id});
+        var paymentRecord= await paymentModel.findOne({bill_id:bill_id});
+        console.log("bill record in delete route:",paymentRecord);
+         console.log(billRecord)
+
+        if (!paymentRecord ) {
+            const dr = await meterModel.deleteOne({_id:bill_id});
             console.log("User deleted successfully" ,dr)
             res.status(200).json({ msg: 'Record Deleted' });
         }

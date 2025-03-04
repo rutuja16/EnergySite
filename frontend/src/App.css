@@ -18,7 +18,7 @@ body{
   
   background-color: linear-gradient(rgb(245, 215, 18),rgb(249, 143, 4),red);
   width:100%;
-  height: auto;
+  height: 100VH;
   overflow-y: auto;
   position: relative;
   background-color: #6d4fc2;
@@ -349,6 +349,7 @@ footer{
 
 footer p{
   padding-top:1%;
+
 }
 
 @media only screen and (max-width: 600px) {

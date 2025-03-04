@@ -39,8 +39,9 @@ const meterModel =mongoose.model("MeterReadingModel",MeterReadingSchema );
 const paymentSchema = new mongoose.Schema({
     bill_id: { type: mongoose.Schema.Types.ObjectId , ref:"MeterReadingModel" , required:true },
     upi_id:{type:String,require:true} ,
-    mpin: Number,
-    amount:Number,
+    mpin: {type:Number,require:true} ,
+    amount:{type:Number,require:true} ,
+    payMode:{type:String,require:true},
     status:{type:String,require:true},
 }, {timestamps:true});
 

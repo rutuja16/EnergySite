@@ -11,17 +11,28 @@ function Data(props) {
     const userName = getSession("userName");
     const isLoggedIn = getSession("isLoggedIn") ;
     const token = getSession("token") ;
-    console.log("Logged User in Data Page : ", isLoggedIn.isLoggedIn)
+    //console.log("Logged User in Data Page : ", isLoggedIn.isLoggedIn)
     
     //const [admin, setAdmin] = useState(false);
     const [ billData , setBillData]= useState([]);
     const allBills = useRef([])
 
+    function addDaysToCurrentDate(days) {
+        let currentDate = new Date();
+        let futureDate = new Date(currentDate);
+        futureDate.setDate(currentDate.getDate() + days);
+
+        //or new Date(Date.now() + 30 * 86400000)
+        return futureDate.toISOString();
+
+    
+    }
+
     const[input, setInput]=useState({
         Name:userName.userName,
         c_date: "" ,
         Reading: "" , 
-        DueDate:addDaysToCurrentDate(30)
+        DueDate: addDaysToCurrentDate(30)
     })
 
     const fetchData=()=>{
@@ -52,13 +63,7 @@ function Data(props) {
 
     
 
-    function addDaysToCurrentDate(days) {
-        let currentDate = new Date();
-        let futureDate = new Date(currentDate);
-        futureDate.setDate(currentDate.getDate() + days);
-        return futureDate.toISOString();
-    }
-
+    
     const handleChange=(e)=>{
         const name=e.target.name;
         const value=e.target.value;
@@ -96,7 +101,16 @@ function Data(props) {
         })
 
     }
-
+    const handleAlert=(status , bill_id , data)=>{
+        if(status==="Paid"){
+            alert("Payment Already Paid")
+            navigate("/data");
+        }
+        else{
+            console.log(data)
+            navigate(`/Payment/${bill_id}` , {state:data})
+        }
+    }
     const handleDelete=(bill_id)=>{
         axios({
             url: `http://localhost:4000/Energy/delete/${bill_id}`,
@@ -110,13 +124,14 @@ function Data(props) {
             console.log(res.data);
             alert(res.data.msg)
             navigate("/data")
-            fetchData()
+            fetchData();
         })
         .catch((error) => { 
             alert("Error in delete Api")
             console.log(error.data)
-            alert(error.data.msg)
+            //alert(error.data.msg)
             navigate("/data")
+            fetchData();
         });
     }
 
@@ -124,7 +139,7 @@ function Data(props) {
         <div className='Table-Container'>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Reading</button>
             
-            <h1 style={{textAlign:'center'}}>Gas / Electricity Details</h1>
+            <h1 style={{textAlign:'center' ,color:'white', paddingBottom:'10px'}}>Gas / Electricity Details</h1>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -148,11 +163,19 @@ function Data(props) {
                         <td>{data.amount}</td>
                         <td>{data.dueDate.split("T")[0]}</td>
                         <td>{data.status}</td>
-                        <td>
-                            <Link to={`/Payment/${data._id}`} state={{ data }}>
+                        <td> 
+                        {/*  sharing state to next component dynamically using link - for this you have to use useLocation to fetch data check payment comment for this
+
+                            <Link to={`/Payment/${data._id}`} state={{ data }} onClick={() => handleAlert(data.status ,data._id )}>
                                 <span className="material-symbols-outlined">credit_card</span>
                             </Link>
+                            */}
+                            <div onClick={() => handleAlert(data.status ,data._id  ,data)}>
+                            <span class="material-symbols-outlined">credit_card</span>
+                            </div>
                         </td>
+                        
+
                         <td>
                             <Link to={`/Data/${data._id}`} onClick={() => handleDelete(data._id)} >
                                 <span className="material-symbols-outlined">delete</span>
