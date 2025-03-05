@@ -19,7 +19,12 @@ function LoginPage(props) {
     }
 
     const handleSubmit=(e)=>{
-        e.preventDefault();
+        if(input.email==="" || input.email==="")
+        {
+            alert("Please fill the details");
+        }
+        else{
+            e.preventDefault();
         axios({
             method: 'post',
             url: 'http://localhost:4000/Energy/login',
@@ -57,6 +62,8 @@ function LoginPage(props) {
                     navigate("/Login");
                   }
             })
+        }
+        
     }
     return (
         <div className='container'>

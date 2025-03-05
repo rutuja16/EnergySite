@@ -13,13 +13,14 @@ const RegisterController = async(req,res)=>{
     connectionWithMongoose();
     try{
         const {name,email, password , userType , secretKey}= req.body;
-        //console.log(req.body);
+        console.log(req.body);
         var user= await userModel.findOne({email});
         if (user){
             console.log("User Already Existing ! Please try to Login")
             return res.json({msg:"User Already Existing ! Please try to Login"})
         }
         else{
+            console.log("hi")
             user = await new userModel({name:name,email:email,password:password,userType:userType , secretKey:secretKey}) ;
             const salt = await bcrypt.genSalt(10);
             user.password = await bcrypt.hash(password, salt);

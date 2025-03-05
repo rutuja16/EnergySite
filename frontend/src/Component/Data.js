@@ -35,6 +35,7 @@ function Data(props) {
         DueDate: addDaysToCurrentDate(30)
     })
 
+    
     const fetchData=()=>{
         console.log("Token for fetch data api in data page :" , token)
             axios({
@@ -71,9 +72,11 @@ function Data(props) {
     }
     
     const handleSubmit=(e)=>{
-        //e.preventDefault();
+        e.preventDefault();
+        if(input.c_date!=="" && input.Reading!=="" && input.Name !=="")
+        {
 
-        console.log(input);
+            console.log(input);
         axios({
             method: 'post',
             url: 'http://localhost:4000/Energy/addMeter',
@@ -99,7 +102,10 @@ function Data(props) {
                 navigate("/data")
                 fetchData();
         })
-
+        }
+        else{
+            alert("Please fill all the details")
+        }
     }
     const handleAlert=(status , bill_id , data)=>{
         if(status==="Paid"){
@@ -190,14 +196,14 @@ function Data(props) {
         
 
         {/* Model */}
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-label="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add  New Reading</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 style={{color:'#6d4fc2'}} class="modal-title" id="exampleModalLabel">Add  New Reading </h5>
+                    {/* <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
-                    </button>
+                    </button> */}
                 </div>
                 <div class="modal-body">
                     <form method='post'>

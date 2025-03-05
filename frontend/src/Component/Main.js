@@ -47,16 +47,35 @@ function Main(props) {
                     </div>
                 </div>
             </div>
+            <div className='mid-head' style={{marginTop:'20px'}}>
+                <h1>cash and carbon Reviews</h1>
+                <p>We’re investing in carbon-cutting technology and supporting government schemes to make low-carbon living for everyone.</p>
+            </div>
             <div className='Containers'>
                 <div className='flex-box '>
                     <div className='card-bottom'>
-                        {/* <img></img> */}
+                        <div>
+                            {/* <span class="material-symbols-outlined">reviews</span> */}
+                            <span class="material-symbols-outlined">star</span>
+                            <span class="material-symbols-outlined">star</span>
+                            <span class="material-symbols-outlined">star</span>
+                            <span class="material-symbols-outlined">star</span>
+                            <span class="material-symbols-outlined">star</span>
+                        </div>
+
+                        
                         <div className='rating'></div>
                         <p>I have been with EDF for many years and have always found their contact centre very efficient. In this instance, Emma helped and supported me to quickly change my tariff to a more beneficial one. </p>
                         <p><b>Kay S,</b> 13 February 2025</p>
                     </div>
                     <div className='card-bottom'>
-                        {/* <img></img> */}
+                        <div>
+                            {/* <span class="material-symbols-outlined">reviews</span> */}
+                            <span class="material-symbols-outlined">star</span>
+                            <span class="material-symbols-outlined">star</span>
+                            <span class="material-symbols-outlined">star</span>
+                            <span class="material-symbols-outlined">star</span>
+                        </div>
                         <div className='rating'></div>
                         <p>Best ever experience talking to customer service! I wholeheartedly recommend EDF  to anyone in need of exceptional customer service. Thank you for making a potentially stressful situation completely stress-free!</p>
                         <p><b>Yiannis,</b> 13 February 2025</p>

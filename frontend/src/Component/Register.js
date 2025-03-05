@@ -16,8 +16,11 @@ function Register(props) {
             e.preventDefault();
             alert("Invalid Admin");
         } 
+
         else{
-            if(cPassword === password)
+            if(name==="" || email==="" || password==="" || userType==="" || cPassword==="")
+                alert("Please fill all the fields")
+            else if(cPassword === password)
                 {
                     e.preventDefault();
                     axios({
@@ -47,14 +50,15 @@ function Register(props) {
             <div className='container'>
                 <div className='box-container'>
                     <div className='Heading'>
-                        <h1> Register Page</h1>
+                        <h1> Register Page </h1>
                     </div>
                     <form method='POST'>
                         <div>
                             <label>Register As</label>
-                            <input type="radio" name="UserType" value="User" onChange={(e) => setUserType(e.target.value)}/> User
-                            <input type="radio" name="UserType" value="Admin" onChange={(e) => setUserType(e.target.value)}/> Admin
+                            <input type="radio" name="UserType" value="User" onChange={(e) => setUserType(e.target.value)} required/> User <span>    </span>
+                            <input type="radio" name="UserType" value="Admin" onChange={(e) => setUserType(e.target.value)} required/> Admin
                         </div>
+                        <br></br>
 
                         {userType === "Admin" ? (
                             <div className="mb-3">
@@ -63,6 +67,7 @@ function Register(props) {
                                 type="text"
                                 className="input"
                                 placeholder="Secret Key"
+                                required
                                 onChange={(e) => {secretKey? setSecretKey(e.target.value) :setSecretKey("userkey")}}
                             />
                             </div>
@@ -76,7 +81,6 @@ function Register(props) {
 
                         <label >Password</label>
                         <input required type="password" className='input' name='password' placeholder='Enter Your Password' onChange={(e) => setPassword(e.target.value)}/> <br/><br/>
-
 
                         <label >Confirm Password</label>
                         <input required type="password" className='input' name='cpass' placeholder='Enter Your Confirm Password' onChange={(e) => setCPassword(e.target.value)}/><br/><br/>

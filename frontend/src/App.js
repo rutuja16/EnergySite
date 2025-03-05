@@ -21,10 +21,10 @@ function App() {
             <div>
               <Routes>
                     {/* unauthorized route */}
-                    {!isLoggedIn.isLoggedIn && (
+                    {isLoggedIn.isLoggedIn ===false && (
                       <>
-                      <h1>{isLoggedIn.isLoggedIn}</h1>
-                        {/* <Route exact path="/" element={<Main />} /> */}
+                      {/* <h1>{isLoggedIn.isLoggedIn}</h1> */}
+                        <Route exact path="/" element={<Main />} />
                         <Route path="/Login" element={<LoginPage />} />
                         <Route exact path="/Register" element={<Register />} />
                         

@@ -23,24 +23,30 @@ function TopNav() {
   return (
         <div>
             <div className='Navbar'>
-
+            
               {!isLoggedIn.isLoggedIn && (
                 <>
-                <h1>Hello Guest</h1>
-                <>
-                <button className='btn'><Link to="/Login">Sign In</Link></button>
-                  <button className='btn'><Link to="/Register">Sign Up</Link></button></>
+                  <>
+                    <h1>Hello Guest</h1>
+                  </>
+                
+                  <>
+                    <button className='btn'><Link to="/Login">Sign In</Link></button>
+                    <button className='btn'><Link to="/Register">Sign Up</Link></button>
+
+                    {/* <button className='btn'><a href='/Login'>Sign In</a></button>
+                    <button className='btn'><a href='/Register'>Sign In</a></button> */}
+                  </>
+
                   
                 </>
               )}
 
               {isLoggedIn.isLoggedIn && userType.userType === "Admin" ? (
                 <>
-                <>
-                    <h1>{userName ? `Welcome ${JSON.parse(JSON.stringify(userName.userName))}` : "Guest"}</h1>
-                </>
-                    
-                    
+                    <>
+                      <h1>{userName ? `Welcome ${JSON.parse(JSON.stringify(userName.userName))}` : "Guest"}</h1>
+                    </>
                     <>
                     <button className='btn'><Link to='/' >Home</Link></button>
                     <button className='btn'><Link to='/dashboard' >Dashboard</Link></button>
@@ -51,20 +57,18 @@ function TopNav() {
               (isLoggedIn.isLoggedIn &&  (
                   <>
                     <>
-                    <h1>{userName ? `Hi, ${JSON.parse(JSON.stringify(userName.userName))}` : "Guest"}</h1>
-                </>
-
-                    <>
-                    <button className='btn'><Link to='/' >Home</Link></button>
-                    <button className='btn'><Link to="/Data">Bill Data</Link></button>
-                    <button className='btn' onClick={logout}>Logout</button>
+                      <h1>{userName ? `Hi, ${JSON.parse(JSON.stringify(userName.userName))}` : "Guest"}</h1>
                     </>
-                    
+                    <>
+                      <button className='btn'><Link to='/' >Home</Link></button>
+                      <button className='btn'><Link to="/Data">Bill Data</Link></button>
+                      <button className='btn' onClick={logout}>Logout</button>
+                    </>
                   </>
                 )
               )}
 
-              
+
             </div>
         </div>
   )
